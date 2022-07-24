@@ -5,8 +5,20 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <div class="container">
-        <div class="col-md-12">
-            View all accounts <a asp-action="index" asp-controller="Account" class="">here</a>.
+        <div class="row">
+            <div class="col-md-12">
+                View all accounts <a asp-action="index" asp-controller="Account">here</a>.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Initiate a transfer <a asp-action="create" asp-controller="Transaction">here</a>.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                View all transactions <a asp-action="index" asp-controller="Transaction">here</a>.
+            </div>
         </div>
     </div>
 </div>

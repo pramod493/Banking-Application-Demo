@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+a {
+  text-decoration: none;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}

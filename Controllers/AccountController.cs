@@ -55,15 +55,16 @@ namespace BankingApp_PK.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Balance,Active")] Account account)
+        public async Task<IActionResult> Create([Bind("Name,Balance")] Account account)
         {
             if (ModelState.IsValid)
             {
+                account.Active = true;
                 _context.Add(account);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(account);
+            return RedirectToAction("Index", "Account");
         }
 
         // GET: Account/Edit/5
@@ -87,7 +88,7 @@ namespace BankingApp_PK.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Balance,Active")] Account account)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Balance")] Account account)
         {
             if (id != account.Id)
             {
