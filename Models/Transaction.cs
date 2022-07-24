@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace BankingApp_PK.Models;
 public class Transaction {
     [Key]
-    [DatabaseGenerated()]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id {get; set;}
     public int SourceId {get; set;}
     public int DestinationId {get; set;}
