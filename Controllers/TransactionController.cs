@@ -81,7 +81,7 @@ public class TransactionController : Controller {
     public IActionResult Create() {
         var vm = new TransferViewModel()
         {
-            Accounts = _context.Account.ToList(),
+            Accounts = _context.Account.Where(f => f.Active).ToList(),
         };
         return View(vm);
     }
@@ -94,8 +94,8 @@ public class TransactionController : Controller {
     public async Task<IActionResult> Create([Bind("FromId,ToId,Amount")] TransferViewModel vm) {
 
         if (ModelState.IsValid) {
-            var sourceAccount = _context.Account.FirstOrDefault(f => f.Id == vm.FromId);
-            var destAccount = _context.Account.FirstOrDefault(f => f.Id == vm.ToId);
+            var sourceAccount = _context.Account.FirstOrDefault(f => f.Id == vm.FromId && f.Active);
+            var destAccount = _context.Account.FirstOrDefault(f => f.Id == vm.ToId && f.Active);
             var hasError = false;
             vm.Errors = new List<string>();
             if (vm.Amount < 1 || vm.Amount > 10000) {
