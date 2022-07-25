@@ -1,3 +1,4 @@
+using BankingApp_PK.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,8 @@ builder.Services.AddDbContext<BankingContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+// builder.Services.AddScoped<ITransaction, Transaction>();
+// builder.Services.AddScoped<IAccount, Account>();
 // Use SQLite for both debug and production
 // Use app.Environment.IsDevelopment() flag to set different connection string
 builder.Services.AddDbContext<BankingContext>(options => 

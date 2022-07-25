@@ -30,12 +30,12 @@ namespace BankingApp_PK.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    SourceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DestinationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SourceBalance = table.Column<double>(type: "REAL", nullable: false),
-                    DestinationBalance = table.Column<double>(type: "REAL", nullable: false),
+                    Source = table.Column<int>(type: "INTEGER", nullable: false),
+                    Destination = table.Column<int>(type: "INTEGER", nullable: false),
                     TransferTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    TransferAmount = table.Column<decimal>(type: "TEXT", nullable: false)
+                    TransferAmount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    SourceBalance = table.Column<decimal>(type: "TEXT", nullable: false),
+                    DestinationBalance = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

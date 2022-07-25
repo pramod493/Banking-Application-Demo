@@ -43,17 +43,17 @@ namespace BankingApp_PK.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("DestinationBalance")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("DestinationId")
+                    b.Property<int>("Destination")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("SourceBalance")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("DestinationBalance")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("SourceId")
+                    b.Property<int>("Source")
                         .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("SourceBalance")
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("TransferAmount")
                         .HasColumnType("TEXT");

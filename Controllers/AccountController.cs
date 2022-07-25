@@ -88,7 +88,7 @@ namespace BankingApp_PK.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Balance")] Account account)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Balance, Active")] Account account)
         {
             if (id != account.Id)
             {
@@ -97,8 +97,8 @@ namespace BankingApp_PK.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
+                try {
+                    account.Active = true;
                     _context.Update(account);
                     await _context.SaveChangesAsync();
                 }
@@ -145,10 +145,10 @@ namespace BankingApp_PK.Controllers
             {
                 return Problem("Entity set 'BankingContext.Account'  is null.");
             }
-            var account = await _context.Account.FindAsync(id);
-            if (account != null)
-            {
-                _context.Account.Remove(account);
+            var account = await _context.Account.FirstOrDefaultAsync(f => f.Id == id);
+            if (account != null) {
+                account.Active = false;
+                _context.Account.Update(account);
             }
             
             await _context.SaveChangesAsync();

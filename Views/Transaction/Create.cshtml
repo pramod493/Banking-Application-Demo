@@ -1,56 +1,66 @@
-@model Transaction
+@model BankingApp_PK.Models.TransferViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Transfer funds";
 }
 
-<h1>Create</h1>
+<h1>
+    @ViewData["Title"]
+</h1>
 
-<h4>Transaction</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SourceId" class="control-label"></label>
-                <input asp-for="SourceId" class="form-control" />
-                <span asp-validation-for="SourceId" class="text-danger"></span>
+<div class="container">
+    @using (Html.BeginForm("Create", "Transaction", FormMethod.Post)) {
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row form-group">
+                    <div class="col-6">
+                        From account
+                    </div>
+                    <div class="col-6">
+                        @Html.DropDownListFor(m => m.FromId, new SelectList(Model.Accounts, "Id", "Name"), "Select From Account")
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-6">
+                        To account
+                    </div>
+                    <div class="col-6">
+                        @Html.DropDownListFor(m => m.ToId, new SelectList(Model.Accounts, "Id", "Name"), "Select To Account")
+                    </div>
+                </div>
+                <div class="row  form-group">
+                    <div class="col-6">
+                        Amount to transfer
+                    </div>
+                    <div class="col-6">
+                        @Html.TextBoxFor(m => m.Amount)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="submit" class="btn btn-primary"/>
+                    </div>
+                </div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="DestinationId" class="control-label"></label>
-                <input asp-for="DestinationId" class="form-control" />
-                <span asp-validation-for="DestinationId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SourceBalance" class="control-label"></label>
-                <input asp-for="SourceBalance" class="form-control" />
-                <span asp-validation-for="SourceBalance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DestinationBalance" class="control-label"></label>
-                <input asp-for="DestinationBalance" class="form-control" />
-                <span asp-validation-for="DestinationBalance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TransferTime" class="control-label"></label>
-                <input asp-for="TransferTime" class="form-control" />
-                <span asp-validation-for="TransferTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TransferAmount" class="control-label"></label>
-                <input asp-for="TransferAmount" class="form-control" />
-                <span asp-validation-for="TransferAmount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+        </div>
+        @Html.AntiForgeryToken()
+    }
 </div>
-
 <div>
-    <a asp-action="Index">Back to List</a>
+    @if (Model.Errors.Count > 0) {
+        @foreach(var error in Model.Errors) {
+            <div class="row">
+                <div class="col text-danger">@error</div>
+            </div>
+        }
+    }
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Home">Return to Home</a> |
+    <a asp-action="Index">See all transactions</a>
 </div>
 
 @section Scripts {

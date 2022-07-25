@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingApp_PK.Migrations
 {
     [DbContext(typeof(BankingContext))]
-    [Migration("20220724211235_InitialCreate")]
+    [Migration("20220725040255_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,17 +45,17 @@ namespace BankingApp_PK.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("DestinationBalance")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("DestinationId")
+                    b.Property<int>("Destination")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("SourceBalance")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("DestinationBalance")
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("SourceId")
+                    b.Property<int>("Source")
                         .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("SourceBalance")
+                        .HasColumnType("TEXT");
 
                     b.Property<decimal>("TransferAmount")
                         .HasColumnType("TEXT");
